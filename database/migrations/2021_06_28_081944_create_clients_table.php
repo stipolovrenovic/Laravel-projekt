@@ -20,7 +20,7 @@ class CreateClientsTable extends Migration
             $table->string('postcode');
             $table->string('city');
             $table->string('country');
-            $table->string('oib');
+            $table->string('oib')->nullable();
             $table->timestamps();
         });
     }
