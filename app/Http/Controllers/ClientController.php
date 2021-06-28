@@ -14,7 +14,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view()
+        return view('clients.index', [
+        'clients' => App\Client::all();
+    ]);
     }
 
     /**
@@ -35,18 +37,25 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        request()->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'postcode' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'oib' => 'required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Client $client)
-    {
-        //
+        $client = new Client();
+        $client->'name' = $request->'title';
+        $client->'address' = $request->'address';
+        $client->'postcode' = $request->'postcode';
+        $client->'city' = $request->'city';
+        $client->'country' = $request->'country';
+        $client->'oib' = $request->'oib';
+        $client->save();
+
+        return redirect('/clients');
     }
 
     /**
@@ -57,7 +66,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -69,7 +78,25 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'postcode' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'oib' => 'required'
+        ]);
+
+    
+        $client->'name' = $request->'title';
+        $client->'address' = $request->'address';
+        $client->'postcode' = $request->'postcode';
+        $client->'city' = $request->'city';
+        $client->'country' = $request->'country';
+        $client->'oib' = $request->'oib';
+        $client->save();
+
+        return redirect('/clients');
     }
 
     /**
@@ -80,6 +107,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return redirect('/clients');
     }
 }
