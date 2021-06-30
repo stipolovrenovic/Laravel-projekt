@@ -1,7 +1,7 @@
 @extends ('layout')
 
 @section ('content')
-<a href="{{ route('clients.create') }}">Novi klijent</a>
+<a class="btn btn-primary" href="{{ route('clients.create') }}">Novi klijent</a>
 <table class="table">
   <thead>
     <tr>
@@ -16,7 +16,7 @@
     	<tr>
     		<td>{{ $client->id }}</td>
     		<td>{{ $client->name }}</td>
-    		<td><a href="{{ route('clients.edit', $client) }}">Uredi</a></td>
+    		<td><a class="btn btn-primary" href="{{ route('clients.edit', $client) }}">Uredi</a></td>
     		<td></td>
     	</tr>
     @endforeach
