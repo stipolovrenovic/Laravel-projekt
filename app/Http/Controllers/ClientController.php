@@ -42,8 +42,7 @@ class ClientController extends Controller
             'address' => 'required',
             'postcode' => 'required',
             'city' => 'required',
-            'country' => 'required',
-            'oib' => 'required'
+            'country' => 'required'
         ]);*/
 
         $client = new Client();
@@ -67,7 +66,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('clients.edit', $client);
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -84,8 +83,7 @@ class ClientController extends Controller
             'address' => 'required',
             'postcode' => 'required',
             'city' => 'required',
-            'country' => 'required',
-            'oib' => 'required'
+            'country' => 'required'
         ]);*/
 
     
