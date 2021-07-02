@@ -28,6 +28,6 @@
     <label for="inputOIB">OIB</label>
     <input type="text" class="form-control" id="inputOIB" name="oib" value="{{ $client->oib }}">
   </div>
-  <button type="submit" class="btn btn-primary">Unesi</button>
+  <button type="submit" class="btn btn-primary">Spremi</button>
 </form>
 @endsection

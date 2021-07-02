@@ -24,11 +24,11 @@ class ClientFactory extends Factory
     {
         return [
             'name'=> $this->faker->name(),
-            'address'=> Str::random(10),
-            'postcode'=> Str::random(5),
-            'city'=> Str::random(10),
-            'country'=> Str::random(10),
-            'oib'=> Str::random(11),
+            'address'=> $this->faker->address(),
+            'postcode'=> rand(10000, 99999),
+            'city'=> $this->faker->city(),
+            'country'=> $this->faker->country(),
+            'oib'=> rand(10000000000, 99999999999),
         ];
     }
 }
