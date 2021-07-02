@@ -6,42 +6,69 @@
 
    <div class="form-group">
     <label for="inputName">Ime i prezime</label>
-    <input type="text" class="form-control" id="inputName" name="name" required="required" aria-describedby="inputNameFeedback">
+    <input type="text" class="form-control @if($errors->has('name')) is-invalid @endif" id="inputName" name="name" value="{{ old('name') }}" aria-describedby="inputNameFeedback">
+    
+    @if($errors->has('name'))
     <div id="inputNameFeedback" class="invalid-feedback">
-      Niste unijeli ime.
+      {{ $errors->first('name') }}
     </div>
+    @endif
+
   </div>
   <div class="form-group">
     <label for="inputAddress">Adresa</label>
-    <input type="text" class="form-control" id="inputAddress" name="address" required="required" aria-describedby="inputAddressFeedback">
+    <input type="text" class="form-control @if($errors->has('address')) is-invalid @endif" id="inputAddress" name="address" value="{{ old('address') }}" aria-describedby="inputAddressFeedback">
+   
+    @if($errors->has('address'))
     <div id="inputAddressFeedback" class="invalid-feedback">
-      Niste unijeli adresu.
+      {{ $errors->first('address') }}
     </div>
+    @endif
+
   </div>
   <div class="form-group">
     <label for="inputPostcode">Poštanski broj</label>
-    <input type="number" class="form-control" id="inputPostcode" name="postcode" required="required" aria-describedby="inputPostcodeFeedback">
+    <input type="number" class="form-control @if($errors->has('postcode')) is-invalid @endif" id="inputPostcode" name="postcode" value="{{ old('postcode') }}"  aria-describedby="inputPostcodeFeedback">
+   
+    @if($errors->has('postcode'))
     <div id="inputPostcodeFeedback" class="invalid-feedback">
-      Niste unijeli poštanski broj.
+      {{ $errors->first('postcode') }}
     </div>
+    @endif
+
   </div>
   <div class="form-group">
     <label for="inputCity">Grad</label>
-    <input type="text" class="form-control" id="inputCity" name="city" aria-describedby="inputCityFeedback">
+    <input type="text" class="form-control @if($errors->has('city')) is-invalid @endif" id="inputCity" name="city" value="{{ old('city') }}" aria-describedby="inputCityFeedback">
+
+    @if($errors->has('city'))
     <div id="inputCityFeedback" class="invalid-feedback">
-      Niste unijeli grad.
+      {{ $errors->first('city') }}
     </div>
+    @endif
+
   </div>
   <div class="form-group">
     <label for="inputCountry">Država</label>
-    <input type="text" class="form-control" id="inputCountry" name="country" required="required" aria-describedby="inputCountryFeedback">
+    <input type="text" class="form-control @if($errors->has('country')) is-invalid @endif" id="inputCountry" name="country" value="{{ old('country') }}" aria-describedby="inputCountryFeedback">
+
+    @if($errors->has('country'))
     <div id="inputCountryFeedback" class="invalid-feedback">
-      Niste unijeli državu.
+      {{ $errors->first('country') }}
     </div>
+    @endif
+
   </div>
   <div class="form-group">
     <label for="inputOIB">OIB</label>
-    <input type="number" class="form-control" id="inputOIB" name="oib">
+    <input type="number" class="form-control @if($errors->has('oib')) is-invalid @endif" id="inputOIB" name="oib" value="{{ old('oib') }}"  aria-describedby="inputOIBFeedback">
+
+    <!@if($errors->has('oib'))
+    <div id="inputOIBFeedback" class="invalid-feedback">
+      {{ $errors->first('oib') }}
+    </div>
+    @endif
+
   </div>
   <button type="submit" class="btn btn-primary">Spremi</button>
 </form>

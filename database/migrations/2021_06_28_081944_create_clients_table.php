@@ -17,7 +17,7 @@ class CreateClientsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
-            $table->string('postcode');
+            $table->integer('postcode');
             $table->string('city');
             $table->string('country');
             $table->string('oib')->nullable();

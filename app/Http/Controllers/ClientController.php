@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreClientRequest;
 
 class ClientController extends Controller
 {
@@ -35,15 +36,9 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreClientRequest $request)
     {
-        /*request()->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'postcode' => 'required',
-            'city' => 'required',
-            'country' => 'required'
-        ]);*/
+        $validated = $request->validated();
 
         $client = new Client();
         $client->name = $request->name;
