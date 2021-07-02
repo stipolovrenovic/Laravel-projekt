@@ -1,5 +1,6 @@
 @extends ('layout')
 @section ('content')
+<a class="btn btn-secondary" href="{{ route('clients.index') }}">Povratak na listu</a>
 <form action="{{ route('clients.store') }}" method="POST">
  @csrf
   <div class="form-group">
@@ -12,7 +13,7 @@
   </div>
   <div class="form-group">
     <label for="inputPostcode">Poštanski broj</label>
-    <input type="number" class="form-control" id="inputPostcode" name="postcode" placeholder = "Unesite poštanski broj klijenta..." required="required">
+    <input type="number" class="form-control" id="inputPostcode" name="postcode" placeholder = "Unesite poštanski broj klijenta..." required="required" maxlength="5">
   </div>
   <div class="form-group">
     <label for="inputCity">Grad</label>

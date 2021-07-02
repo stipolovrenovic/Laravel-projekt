@@ -1,5 +1,6 @@
 @extends ('layout')
 @section ('content')
+<a class="btn btn-secondary" href="{{ route('clients.index') }}">Povratak na listu</a>
 <form action="{{ route('clients.update', $client) }}" method="POST">
  @csrf
  @method('PUT')
