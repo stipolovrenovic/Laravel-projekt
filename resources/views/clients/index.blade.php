@@ -35,7 +35,6 @@
   var deleteButton = document.getElementById('obrisiKlijenta');
   deleteButton.addEventListener("click", function(event)
   {
-    console.log('test');
     event.preventDefault();
     if (confirm('Jeste li sigurni o brisanju klijenta?'))
     {
