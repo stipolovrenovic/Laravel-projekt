@@ -71,17 +71,10 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(StoreClientRequest $request, Client $client)
     {
-        /*request()->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'postcode' => 'required',
-            'city' => 'required',
-            'country' => 'required'
-        ]);*/
+        $validated = $request->validated();
 
-    
         $client->name = $request->name;
         $client->address = $request->address;
         $client->postcode = $request->postcode;
