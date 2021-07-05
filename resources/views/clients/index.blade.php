@@ -13,33 +13,36 @@
   </thead>
   <tbody>
     @foreach ($clients as $client)
-    	<tr>
-    		<td>{{ $client->id }}</td>
-    		<td>{{ $client->name }}</td>
-    		<td><a class="btn btn-primary" href="{{ route('clients.edit', $client) }}">Uredi</a></td>
-    		<td>
-    			<form id = "deleteForm" method="POST" action="{{ route('clients.destroy', $client) }}">
-			        @csrf
-			        @method('DELETE')
+    <tr>
+      <td>{{ $client->id }}</td>
+      <td>{{ $client->name }}</td>
+      <td><a class="btn btn-primary" href="{{ route('clients.edit', $client) }}">Uredi</a></td>
+      <td>
+       <form method="POST" action="{{ route('clients.destroy', $client) }}">
+         @csrf
+         @method('DELETE')
 
-			        <div class="form-group">
-			            <input type="submit" class="btn btn-danger" id="obrisiKlijenta" value="Obriši">
-			        </div>
-			    </form>	
-    		</td>
-    	</tr>
-    @endforeach
-  </tbody>
+         <div class="form-group">
+           <input type="submit" class="deleteButton btn btn-danger" value="Obriši">
+         </div>
+       </form>	
+     </td>
+   </tr>
+   @endforeach
+ </tbody>
 </table>
 <script>
-  var deleteButton = document.getElementById('obrisiKlijenta');
-  deleteButton.addEventListener("click", function(event)
-  {
+  var deleteButtons = document.querySelectorAll('.deleteButton');
+
+  deleteButtons.forEach(function(element) {
+   element.addEventListener("click", function(event)
+   {
     event.preventDefault();
     if (confirm('Jeste li sigurni o brisanju klijenta?'))
     {
-      document.getElementById('deleteForm').submit();
+      element.closest('form').submit();
     }
   });
+ })
 </script>
 @endsection
