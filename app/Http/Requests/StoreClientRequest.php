@@ -27,10 +27,10 @@ class StoreClientRequest extends FormRequest
         return [
             'name' => 'required',
             'address' => 'required',
-            'postcode' => 'required|max:5',
+            'postcode' => 'required|integer|max:5',
             'city' => 'required',
             'country' => 'required',
-            'oib' => 'unique:clients|max:11'
+            'oib' => 'integer|unique:clients|max:11'
         ];
     }
 }
