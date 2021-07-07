@@ -160,7 +160,7 @@
     @if(in_array('Facebook_Oglašavanje', $client->services))
     <option value="Facebook_Oglašavanje" selected>Facebook oglašavanje</option>
     @else
-    <option value="Facebook_oglašavanje">Facebook oglašavanje</option>
+    <option value="Facebook_Oglašavanje">Facebook oglašavanje</option>
     @endif
   </select>
 

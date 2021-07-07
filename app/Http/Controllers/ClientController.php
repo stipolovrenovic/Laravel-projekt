@@ -87,6 +87,11 @@ class ClientController extends Controller
         $client->city = $request->city;
         $client->country = $request->country;
         $client->oib = $request->oib;
+        $client->type = $request->type;
+        $client->international = $request->international;
+        $client->email = $request->email;
+        $client->services = implode(", ", $request->services);
+        $client->active = $request->active;
         $client->save();
 
         return redirect()->route('clients.index');

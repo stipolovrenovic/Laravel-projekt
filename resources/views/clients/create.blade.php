@@ -159,7 +159,7 @@
     @if(old('services') && in_array('Facebook_Oglašavanje', old('services')))
     <option value="Facebook_Oglašavanje" selected>Facebook oglašavanje</option>
     @else
-    <option value="Facebook_oglašavanje">Facebook oglašavanje</option>
+    <option value="Facebook_Oglašavanje">Facebook oglašavanje</option>
     @endif
   </select>
 
