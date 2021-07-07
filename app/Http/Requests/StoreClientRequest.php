@@ -30,7 +30,11 @@ class StoreClientRequest extends FormRequest
             'postcode' => 'required|digits:5',
             'city' => 'required',
             'country' => 'required',
-            'oib' => 'digits:11|unique:clients'
+            'oib' => 'digits:11|unique:clients',
+            'type' => 'required',
+            'international' => 'required',
+            'email' => 'required|email',
+            'services' => 'required'
         ];
     }
 }
