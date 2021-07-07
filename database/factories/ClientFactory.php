@@ -30,7 +30,7 @@ class ClientFactory extends Factory
             'country'=> $this->faker->country(),
             'oib'=>  $this->faker->randomFloat(0, 10000000000, 99999999999),
             'type'=> $this->faker->randomFloat(0, 1, 2),
-            'international'=> $this->faker->randomFloat(0, 0, 1),
+            'international'=> $this->faker->randomFloat(0, 1, 2),
             'email'=> $this->faker->email(),
             'services'=> Str::random(15),
             'active'=> $this->faker->boolean()

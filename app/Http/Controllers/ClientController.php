@@ -66,6 +66,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
+        $client->services = explode(', ', $client->services);
         return view('clients.edit', compact('client'));
     }
 
