@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -13,11 +14,19 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('clients.index', [
-        'clients' => Client::all()
-    ]);
+        if(!$request->keyword)
+            return view('clients.index', [
+                'clients' => Client::all()
+            ]);
+        else
+        {
+            return view('clients.index', [
+                'clients' => Client::where('name', 'like', '%'.$request->keyword.'%')
+                ->get()
+            ]);
+        }
     }
 
     /**
@@ -50,7 +59,7 @@ class ClientController extends Controller
         $client->type = $request->type;
         $client->international = $request->international;
         $client->email = $request->email;
-        $client->services = implode(", ", $request->services);
+        $client->services = $request->services;
         $client->active = $request->active;
         $client->save();
 
@@ -66,7 +75,6 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        $client->services = explode(', ', $client->services);
         return view('clients.edit', compact('client'));
     }
 
@@ -90,7 +98,7 @@ class ClientController extends Controller
         $client->type = $request->type;
         $client->international = $request->international;
         $client->email = $request->email;
-        $client->services = implode(", ", $request->services);
+        $client->services = $request->services;
         $client->active = $request->active;
         $client->save();
 

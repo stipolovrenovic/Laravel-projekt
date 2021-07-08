@@ -1,7 +1,26 @@
 @extends ('layout')
 
 @section ('content')
+<form action="{{ route('clients.index') }}" method="GET">
+ @csrf
+
+ <div class="form-group">
+  <label for="inputSearch">Pretraga klijenata</label>
+  <input type="text" class="form-control @error('keyword') is-invalid @enderror" id="inputSearch" name="keyword" value="{{ old('keyword') }}" aria-describedby="inputSearchFeedback">
+  
+  @error('keyword')
+  <div id="inputSearchFeedback" class="invalid-feedback">
+    {{ $message }}
+  </div>
+  @enderror
+
+</div>
+<button type="submit" class="btn btn-primary">Spremi</button>
+</form>
+<br>
 <a class="btn btn-success" href="{{ route('clients.create') }}">Novi klijent</a>
+<br>
+<br>
 <table class="table">
   <thead>
     <tr>
