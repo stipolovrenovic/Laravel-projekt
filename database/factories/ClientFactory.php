@@ -32,7 +32,7 @@ class ClientFactory extends Factory
             'type'=> $this->faker->randomFloat(0, 1, 2),
             'international'=> $this->faker->randomFloat(0, 1, 2),
             'email'=> $this->faker->email(),
-            'services'=> Str::random(15),
+            'services'=> $this->faker->randomElements($array = array ('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_Oglašavanje', 'Facebook_Oglašavanje'), $count = rand(1, 6)),
             'active'=> $this->faker->boolean()
         ];
     }
