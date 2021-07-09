@@ -29,7 +29,7 @@ class UpdateClientRequest extends FormRequest
             'postcode' => 'required|digits:5',
             'city' => 'required',
             'country' => 'required',
-            'oib' => 'required_if:type,==,1|digits:11|unique:clients,oib,'.request()->route('client')->id,
+            'oib' => 'required_if:type,==,1|nullable|digits:11|unique:clients,oib,'.request()->route('client')->id,
             'type' => 'required',
             'international' => 'required',
             'email' => 'required|email|unique:clients,email,'.,

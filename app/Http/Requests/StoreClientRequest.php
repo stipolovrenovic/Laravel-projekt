@@ -30,7 +30,7 @@ class StoreClientRequest extends FormRequest
             'postcode' => 'required|digits:5',
             'city' => 'required',
             'country' => 'required',
-            'oib' => 'required_if:type,==,1|digits:11|unique:clients',
+            'oib' => 'required_if:type,==,1|nullable|digits:11|unique:clients',
             'type' => 'required',
             'international' => 'required',
             'email' => 'required|email|unique:clients',
