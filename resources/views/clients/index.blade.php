@@ -2,8 +2,6 @@
 
 @section ('content')
 <form action="{{ route('clients.index') }}" method="GET">
- @csrf
-
  <div class="form-group">
   <label for="inputSearch">Pretraga klijenata</label>
   <input type="text" class="form-control @error('keyword') is-invalid @enderror" id="inputSearch" name="keyword" value="{{ old('keyword') }}" aria-describedby="inputSearchFeedback">

@@ -6,6 +6,8 @@
 ?>
 
 <a class="btn btn-secondary" href="{{ route('clients.index') }}">Povratak na listu</a>
+<br>
+<br>
 <form action="{{ route('clients.store') }}" method="POST">
  @csrf
 
