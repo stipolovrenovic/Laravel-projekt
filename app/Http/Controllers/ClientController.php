@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UpdateClientRequest;
 
 class ClientController extends Controller
 {
@@ -85,7 +85,7 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreClientRequest $request, Client $client)
+    public function update(UpdateClientRequest $request, Client $client)
     {
         $validated = $request->validated();
 

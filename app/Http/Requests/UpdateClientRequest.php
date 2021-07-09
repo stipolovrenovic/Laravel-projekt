@@ -4,8 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
-class StoreClientRequest extends FormRequest
+class UpdateClientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class StoreClientRequest extends FormRequest
      */
     public function authorize()
     {
-       return true;
+        return true;
     }
 
     /**
@@ -30,7 +29,7 @@ class StoreClientRequest extends FormRequest
             'postcode' => 'required|digits:5',
             'city' => 'required',
             'country' => 'required',
-            'oib' => 'digits:11|unique:clients',
+            'oib' => 'digits:11|unique:clients,oib,'.request()->route('client')->id,
             'type' => 'required',
             'international' => 'required',
             'email' => 'required|email|unique:clients,email,'.request()->route('client')->id,
