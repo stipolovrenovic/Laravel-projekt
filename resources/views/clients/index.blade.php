@@ -15,7 +15,7 @@
   @enderror
 
 </div>
-<button type="submit" class="btn btn-primary">Spremi</button>
+<button type="submit" class="btn btn-primary">Traži</button>
 </form>
 <br>
 <a class="btn btn-success" href="{{ route('clients.create') }}">Novi klijent</a>
