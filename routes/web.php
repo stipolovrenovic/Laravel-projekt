@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,4 @@ Route::post('/clients', [ClientController::class, 'store'])->name('clients.store
 Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->name('clients.edit');
 Route::put('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
 Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
