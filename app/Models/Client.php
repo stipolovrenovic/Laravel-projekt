@@ -12,4 +12,9 @@ class Client extends Model
     protected $casts = [
         'services' => 'array',
     ];
+
+    public function projects()
+    {
+    	return $this->hasMany(Project::class);
+    }
 }
