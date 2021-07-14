@@ -32,8 +32,10 @@ class UpdateClientRequest extends FormRequest
             'oib' => 'required_if:type,==,1|nullable|digits:11|unique:clients,oib,'.request()->route('client')->id,
             'type' => 'required',
             'international' => 'required',
-            'email' => 'required|email|unique:clients,email,'.,
+            'email' => 'required|email|unique:clients,email,'.request()->route('client')->id,
             'services' => 'required'
         ];
     }
+
+    
 }
