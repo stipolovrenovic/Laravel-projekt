@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Client;
+use App\Models\Project;
 
-class ClientSeeder extends Seeder
+class ProjectSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        Client::factory()
-        ->count(10)
-        ->create();
+    	Project::factory()
+    	->count(10)
+    	->create();
     }
 }
