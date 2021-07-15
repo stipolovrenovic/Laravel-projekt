@@ -121,7 +121,7 @@
   <label for="selectServices">Usluge</label>
   <select class="custom-select @error('services') is-invalid @enderror" id="selectServices" name="services[]" aria-describedby="selectServicesFeedback" multiple>
     @foreach($services as $service)
-    <option value="$service" @if(old('services') && in_array($service, old('services'))) selected @endif>{{ str_replace('_', ' ', $service) }}</option>
+    <option value="{{ $service }}" @if(old('services') && in_array($service, old('services'))) selected @endif>{{ str_replace('_', ' ', $service) }}</option>
     @endforeach
   </select>
 

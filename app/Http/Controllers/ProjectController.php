@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -12,12 +13,20 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('projects.index', [
-        'projects' => Project::all()
-    ]);
-   }
+        if(!$request->keyword)
+            return view('projects.index', [
+                'projects' => Project::all()
+            ]);
+        else
+        {
+            return view('projects.index', [
+                'projects' => Project::where('name', 'like', '%'.$request->keyword.'%')
+                ->get()
+            ]);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +35,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -35,9 +44,19 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //
+        $validated = $request->validated();
+        
+        $project = new Project();
+        $project->client_id = $request->client_id;
+        $project->name = $request->name;
+        $project->description = $request->description;
+        $project->price = $request->price;
+        $project->deployed_at = $request->deployed_at;
+        $project->save();
+
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -59,7 +78,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -69,9 +88,18 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(StoreProjectRequest $request, Project $project)
     {
-        //
+        $validated = $request->validated();
+        
+        $project->client_id = $request->client_id;
+        $project->name = $request->name;
+        $project->description = $request->description;
+        $project->price = $request->price;
+        $project->deployed_at = $request->deployed_at;
+        $project->save();
+
+        return redirect()->route('projects.index');
     }
 
     /**
