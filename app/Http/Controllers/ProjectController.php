@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
 
@@ -35,7 +36,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        return view('projects.create', [
+            'clients' => Client::all()
+        ]);
     }
 
     /**
@@ -78,7 +81,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        return view('projects.edit', compact('project'), [
+            'clients' => Client::all()
+        ]);
     }
 
     /**

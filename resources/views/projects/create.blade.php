@@ -1,10 +1,6 @@
 @extends ('layout')
 @section ('content')
 
-<?php
-use App\Models\Client;
-?>
-
 <a class="btn btn-secondary" href="{{ route('projects.index') }}">Povratak na listu</a>
 <br>
 <br>
@@ -15,7 +11,7 @@ use App\Models\Client;
   <label for="selectClient">Vlasnik projekta</label>
   <select class="custom-select @error('client_id') is-invalid @enderror" id="selectClient" name="client_id" aria-describedby="selectClientFeedback">
     <option disabled value=""@if(!old('client_id')) selected @endif>Odaberite klijenta...</option>
-    @foreach(Client::all() as $client)
+    @foreach($clients as $client)
     <option value="{{ $client->id }}" @if(old('client_id') == $client->id) selected @endif>{{ $client->name }}</option>
     @endforeach
   </select>
