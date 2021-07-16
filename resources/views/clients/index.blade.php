@@ -24,6 +24,7 @@
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Ime i prezime</th>
+      <th scope="col">Detaljno...</th>
       <th scope="col">Uredi klijenta</th>
       <th scope="col">Obriši klijenta</th>
     </tr>
@@ -33,6 +34,7 @@
     <tr>
       <td>{{ $client->id }}</td>
       <td>{{ $client->name }}</td>
+      <td><a class="btn btn-info" href="{{ route('clients.show', $client) }}">Otvori</a></td>
       <td><a class="btn btn-primary" href="{{ route('clients.edit', $client) }}">Uredi</a></td>
       <td>
        <form method="POST" action="{{ route('clients.destroy', $client) }}">
