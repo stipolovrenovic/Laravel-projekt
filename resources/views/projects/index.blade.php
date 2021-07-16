@@ -24,6 +24,7 @@
       <th scope="col">ID</th>
       <th scope="col">Naziv projekta</th>
       <th scope="col">Ime klijenta</th>
+      <th scope="col">Detaljno...</th>
       <th scope="col">Uredi projekt</th>
       <th scope="col">Obriši projekt</th>
     </tr>
@@ -34,6 +35,7 @@
       <td>{{ $project->id }}</td>
       <td>{{ $project->name }}</td>
       <td>{{ $project->client->name }}</td>
+      <td><a class="btn btn-info" href="{{ route('projects.show', $project) }}">Otvori</a></td>
       <td><a class="btn btn-primary" href="{{ route('projects.edit', $project) }}">Uredi</a></td>
       <td>
        <form method="POST" action="{{ route('projects.destroy', $project) }}">

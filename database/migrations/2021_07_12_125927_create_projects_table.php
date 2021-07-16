@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 7, 2);
-            $table->date('deployed_at');
+            $table->date('deployed_at')->nullable();
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
