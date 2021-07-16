@@ -21,12 +21,9 @@ class CreateProjectsTable extends Migration
             $table->decimal('price', 7, 2);
             $table->date('deployed_at');
             $table->timestamps();
+
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });
-
-        Schema::table('projects', function($table) {
-         $table->foreign('client_id')->references('id')->on('clients');
-     });
-
     }
 
     /**
