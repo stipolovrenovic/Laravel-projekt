@@ -16,7 +16,7 @@ use App\Models\Client;
   <select class="custom-select @error('client_id') is-invalid @enderror" id="selectClient" name="client_id" aria-describedby="selectClientFeedback">
     <option disabled value=""@if(!old('client_id')) selected @endif>Odaberite klijenta...</option>
     @foreach(Client::all() as $client)
-    <option value="{{ $client->id }}" @if(old('client_id') == 1) selected @endif>{{ $client->name }}</option>
+    <option value="{{ $client->id }}" @if(old('client_id') == $client->id) selected @endif>{{ $client->name }}</option>
     @endforeach
   </select>
 
