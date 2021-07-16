@@ -21,6 +21,7 @@ $serviceArray = $client->services
 <p><h5>Usluge: </h5>@foreach($client->services as $service){{ str_replace('_', ' ', $service) }}@if(end($serviceArray) != $service), @endif @endforeach.</p>
 <p><h5>Aktivan? </h5>@if($client->active == 1) Da @else Ne @endif</p>
 <h5>Projekti:</h5>
+@if(count($client->projects) >= 1)
 <table class="table">
   <thead>
     <tr>
@@ -50,4 +51,7 @@ $serviceArray = $client->services
    @endforeach
  </tbody>
 </table>
+@else
+<p>Nema projekata.</p>
+@endif
 @endsection
