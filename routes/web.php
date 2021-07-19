@@ -19,6 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
 
 Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
 Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
