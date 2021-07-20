@@ -1,6 +1,10 @@
 @extends ('layout')
 @section ('content')
 
+<form action="{{ route('logout') }}"  method="POST">
+  @csrf
+  <button type="submit" class="btn btn-warning">Odjavi se</button>
+</form>
 <a class="btn btn-secondary" href="{{ route('projects.index') }}">Povratak na listu</a>
 <br>
 <br>

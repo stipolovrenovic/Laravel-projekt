@@ -1,6 +1,9 @@
 @extends ('layout')
-
 @section ('content')
+<form action="{{ route('logout') }}"  method="POST">
+  @csrf
+  <button type="submit" class="btn btn-warning">Odjavi se</button>
+</form>
 <form action="{{ route('clients.index') }}" method="GET">
  <div class="form-group">
   <label for="inputSearch">Pretraga klijenata</label>
