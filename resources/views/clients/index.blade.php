@@ -1,16 +1,22 @@
 @extends ('layout')
 @section ('content')
 
-<form
-class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{{ route('clients.index') }}" method="GET">
-<div class="input-group">
- <input type="text" class="form-control bg-white border-0 small" name="keyword" placeholder="Unesite ime klijenta..."
- aria-label="Search" aria-describedby="basic-addon2">
- <div class="input-group-append">
-  <button class="btn btn-primary" type="submit">
-    <i class="fas fa-search fa-sm"></i>
-  </button>
-</div>
+<div class="container-fluid">
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Klijenti</h1>
+  </div>
+
+  <form
+  class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{{ route('clients.index') }}" method="GET">
+  <div class="input-group">
+   <input type="text" class="form-control bg-white border-0 small" name="keyword" placeholder="Unesite ime klijenta..."
+   aria-label="Search" aria-describedby="basic-addon2">
+   <div class="input-group-append">
+    <button class="btn btn-primary" type="submit">
+      <i class="fas fa-search fa-sm"></i>
+    </button>
+  </div>
 </div>
 </form>
 <a class="btn btn-success" href="{{ route('clients.create') }}">Novi klijent</a>
@@ -47,6 +53,7 @@ class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 
    @endforeach
  </tbody>
 </table>
+</div>
 <script>
   var deleteButtons = document.querySelectorAll('.deleteButton');
 
