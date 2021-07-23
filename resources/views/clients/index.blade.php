@@ -1,24 +1,18 @@
 @extends ('layout')
 @section ('content')
-<form action="{{ route('logout') }}"  method="POST">
-  @csrf
-  <button type="submit" class="btn btn-warning">Odjavi se</button>
-</form>
-<form action="{{ route('clients.index') }}" method="GET">
- <div class="form-group">
-  <label for="inputSearch">Pretraga klijenata</label>
-  <input type="text" class="form-control @error('keyword') is-invalid @enderror" id="inputSearch" name="keyword" value="{{ old('keyword') }}" aria-describedby="inputSearchFeedback">
-  
-  @error('keyword')
-  <div id="inputSearchFeedback" class="invalid-feedback">
-    {{ $message }}
-  </div>
-  @enderror
 
+<form
+class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{{ route('clients.index') }}" method="GET">
+<div class="input-group">
+ <input type="text" class="form-control bg-white border-0 small" name="keyword" placeholder="Unesite ime klijenta..."
+ aria-label="Search" aria-describedby="basic-addon2">
+ <div class="input-group-append">
+  <button class="btn btn-primary" type="submit">
+    <i class="fas fa-search fa-sm"></i>
+  </button>
 </div>
-<button type="submit" class="btn btn-primary">Traži</button>
+</div>
 </form>
-<br>
 <a class="btn btn-success" href="{{ route('clients.create') }}">Novi klijent</a>
 <br>
 <br>
