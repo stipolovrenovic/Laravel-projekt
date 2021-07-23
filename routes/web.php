@@ -15,17 +15,13 @@ use App\Http\Controllers\ProjectController;
 |
 */
 
-Route::get('/', function () {
-	return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-	return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
 
 Route::middleware(['auth'])->group(function () {
+	Route::get('/', function () {
+		return view('welcome');
+	})->name('welcome');
+
 	Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
 	Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
 	Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
