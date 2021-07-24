@@ -5,13 +5,12 @@
 $services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_Oglašavanje', 'Facebook_Oglašavanje');
 ?>
 
-<form action="{{ route('logout') }}"  method="POST">
-  @csrf
-  <button type="submit" class="btn btn-warning">Odjavi se</button>
-</form>
-<a class="btn btn-secondary" href="{{ route('clients.index') }}">Povratak na listu</a>
-<br>
-<br>
+<div class="container-fluid">
+
+ <div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Uredi klijenta</h1>
+ </div>
+
 <form action="{{ route('clients.update', $client) }}" method="POST">
  @csrf
  @method('PUT')
@@ -19,7 +18,7 @@ $services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_
  <div class="form-group">
   <label for="inputName">Ime i prezime</label>
   <input type="text" class="form-control @error('name') is-invalid @enderror" id="inputName" name="name" value="{{ $client->name }}" aria-describedby="inputNameFeedback">
-  
+
   @error('name')
   <div id="inputNameFeedback" class="invalid-feedback">
     {{ $message }}
@@ -30,7 +29,7 @@ $services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_
 <div class="form-group">
   <label for="inputAddress">Adresa</label>
   <input type="text" class="form-control @error('address') is-invalid @enderror" id="inputAddress" name="address" value="{{ $client->address }}" aria-describedby="inputAddressFeedback">
-  
+
   @error('address')
   <div id="inputAddressFeedback" class="invalid-feedback">
     {{ $message }}
@@ -41,7 +40,7 @@ $services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_
 <div class="form-group">
   <label for="inputPostcode">Poštanski broj</label>
   <input type="number" class="form-control @error('postcode') is-invalid @enderror" id="inputPostcode" name="postcode" value="{{ $client->postcode }}"  aria-describedby="inputPostcodeFeedback">
-  
+
   @error('postcode')
   <div id="inputPostcodeFeedback" class="invalid-feedback">
     {{ $message }}
@@ -148,4 +147,5 @@ $services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_
 </div>
 <button type="submit" class="btn btn-primary">Spremi</button>
 </form>
+</div>
 @endsection

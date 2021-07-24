@@ -1,13 +1,12 @@
 @extends ('layout')
 @section ('content')
 
-<form action="{{ route('logout') }}"  method="POST">
-  @csrf
-  <button type="submit" class="btn btn-warning">Odjavi se</button>
-</form>
-<a class="btn btn-secondary" href="{{ route('projects.index') }}">Povratak na listu</a>
-<br>
-<br>
+<div class="container-fluid">
+
+ <div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Uredi projekt</h1>
+ </div>
+
 <form action="{{ route('projects.update', $project) }}" method="POST">
  @csrf
  @method('PUT')
@@ -30,7 +29,7 @@
 <div class="form-group">
   <label for="inputName">Naziv projekta</label>
   <input type="text" class="form-control @error('name') is-invalid @enderror" id="inputName" name="name" value="{{ $project->name }}" aria-describedby="inputNameFeedback">
-  
+
   @error('name')
   <div id="inputNameFeedback" class="invalid-feedback">
     {{ $message }}
@@ -73,6 +72,7 @@
 </div>
 <button type="submit" class="btn btn-primary">Spremi</button>
 </form>
+</div>
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="{{url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
