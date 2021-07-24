@@ -22,7 +22,7 @@
 <a class="btn btn-success" href="{{ route('projects.create') }}">Novi projekt</a>
 <br>
 <br>
-<table class="table">
+<table class="table bg-white">
   <thead>
     <tr>
       <th scope="col">ID</th>
