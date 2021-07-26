@@ -22,6 +22,9 @@ Route::middleware(['auth'])->group(function () {
 		return view('welcome');
 	})->name('welcome');
 
+	Route::get('/profile', [UserController::class, 'edit'])->name('profile');
+	Route::get('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
 	Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
 	Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
 	Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
