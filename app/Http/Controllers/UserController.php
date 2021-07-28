@@ -56,9 +56,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
-        return view('profile', compact('user'));
+        return view('users.edit');
     }
 
     /**
@@ -69,8 +69,14 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request, User $user)
-    {
-        //
+    { 
+        $validated = $request->validated();
+        
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        return back()->withInput();
     }
 
     /**
