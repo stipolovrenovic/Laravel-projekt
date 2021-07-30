@@ -53,6 +53,7 @@
    @endforeach
  </tbody>
 </table>
+{{ $clients->links() }}
 </div>
 <script>
   var deleteButtons = document.querySelectorAll('.deleteButton');

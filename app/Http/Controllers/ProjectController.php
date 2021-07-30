@@ -18,14 +18,12 @@ class ProjectController extends Controller
     {
         if(!$request->keyword)
             return view('projects.index', [
-                'projects' => Project::all()
+                'projects' => Project::paginate(10)
             ]);
         else
         {
             return view('projects.index', [
-                'projects' => Project::where('name', 'like', '%'.$request->keyword.'%')
-                ->get()
-            ]);
+                'projects' => Project::where('name', 'like', '%'.$request->keyword.'%')->paginate(10)
         }
     }
 

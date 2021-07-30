@@ -55,6 +55,7 @@
    @endforeach
  </tbody>
 </table>
+{{ $projects->links() }}
 </div>
 <script>
   var deleteButtons = document.querySelectorAll('.deleteButton');

@@ -18,13 +18,12 @@ class ClientController extends Controller
     {
         if(!$request->keyword)
             return view('clients.index', [
-                'clients' => Client::all()
+                'clients' => Client::paginate(10)
             ]);
         else
         {
             return view('clients.index', [
-                'clients' => Client::where('name', 'like', '%'.$request->keyword.'%')
-                ->get()
+                'clients' => Client::where('name', 'like', '%'.$request->keyword.'%')->paginate(10)
             ]);
         }
     }
