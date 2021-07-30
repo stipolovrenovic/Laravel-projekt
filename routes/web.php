@@ -24,7 +24,8 @@ Route::middleware(['auth'])->group(function () {
 	})->name('welcome');
 
 	Route::get('/profile', [UserController::class, 'edit'])->name('users.edit');
-	Route::get('/profile', [UserController::class, 'update'])->name('users.update');
+	Route::get('/profile/delete-image', [UserController::class, 'deleteImage'])->name('users.deleteImage');
+	Route::put('/profile', [UserController::class, 'update'])->name('users.update');
 
 	Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
 	Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
