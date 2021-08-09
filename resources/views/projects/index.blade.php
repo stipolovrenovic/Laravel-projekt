@@ -20,11 +20,26 @@
   </div>
 </form>
 <a class="btn btn-success" href="{{ route('projects.create') }}">Novi projekt</a>
+<form method="POST" action="{{ route('projects.destroyChecked') }}">
+      @csrf
+      @method('DELETE')
+
+      <div class="form-group">
+        <input type="submit" id="deleteChecked" class="btn btn-danger" value="Obriši označene projekte"  @error('projectsForDeleting') is-invalid @enderror aria-describedby="deleteCheckedProjectsFeedback">
+
+        @error('projectsForDeleting')
+        <div id="deleteCheckedProjectsFeedback" class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
+      </div>
+</form>  
 <br>
 <br>
 <table class="table bg-white">
   <thead>
     <tr>
+      <th scope="col"></th>
       <th scope="col">ID</th>
       <th scope="col">Naziv projekta</th>
       <th scope="col">Ime klijenta</th>
@@ -36,6 +51,7 @@
   <tbody>
     @foreach ($projects as $project)
     <tr>
+      <td><input class="form-check-input" type="checkbox" name="projectsForDeleting[]" value="{{ $project }}" id="checkProjectforDeletion"/></td>
       <td>{{ $project->id }}</td>
       <td>{{ $project->name }}</td>
       <td>{{ $project->client->name }}</td>
@@ -58,17 +74,28 @@
 {{ $projects->links() }}
 </div>
 <script>
-  var deleteButtons = document.querySelectorAll('.deleteButton');
+var deleteButtons = document.querySelectorAll('.deleteButton');
 
-  deleteButtons.forEach(function(element) {
-   element.addEventListener("click", function(event)
-   {
+deleteButtons.forEach(function(element) {
+  element.addEventListener("click", function(event)
+  {
     event.preventDefault();
     if (confirm('Jeste li sigurni o brisanju projekta?'))
     {
       element.closest('form').submit();
     }
   });
- })
+})
+
+var deleteCheckedButton = document.getElementById('deleteChecked');
+
+deleteCheckedButton.addEventListener("click", function(event)
+{
+  event.preventDefault();
+  if (confirm('Jeste li sigurni o brisanju označenih projekata?'))
+  {
+   deleteCheckedButton.closest('form').submit();
+  }
+});
 </script>
 @endsection

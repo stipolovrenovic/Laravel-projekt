@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\DeleteProjectsRequest;
 
 class ProjectController extends Controller
 {
@@ -24,6 +25,7 @@ class ProjectController extends Controller
         {
             return view('projects.index', [
                 'projects' => Project::where('name', 'like', '%'.$request->keyword.'%')->paginate(10)
+            ]);
         }
     }
 
@@ -115,5 +117,18 @@ class ProjectController extends Controller
     {
         $project->delete();
         return redirect()->route('projects.index');
+    }
+
+
+    public function destroyChecked(DeleteProjectsRequest $request)
+    {
+        $validated = $request->validated();
+
+        foreach($request->projectsForDeleting as $project)
+        {
+            $project->delete();
+        }
+
+        return back();
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Http\Requests\DeleteClientsRequest;
 
 class ClientController extends Controller
 {
@@ -125,5 +126,19 @@ class ClientController extends Controller
     {
         $client->delete();
         return redirect()->route('clients.index');
+    }
+
+    public function destroyChecked(DeleteClientsRequest $request)
+    {
+        $validated = $request->validated();
+
+        dd($request);
+
+        foreach($request->clientsForDeleting as $client)
+        {
+            $client->delete();
+        }
+
+        return back();
     }
 }
