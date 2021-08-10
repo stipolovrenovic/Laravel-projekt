@@ -22,12 +22,13 @@
 <a class="btn btn-success" href="{{ route('clients.create') }}">Novi klijent</a>
 <br>
 <br>
-<form method="POST" action="{{ route('clients.destroyChecked') }}">
+<form id="deleteCheckedForm" method="POST" action="{{ route('clients.destroyChecked') }}">
       @csrf
       @method('DELETE')
 
+      <input type="hidden" name="clientsForDeleting" value="">
       <div class="form-group">
-        <input type="submit" id="deleteChecked" class="btn btn-danger" value="Obriši označene klijente" @error('clientsForDeleting') is-invalid @enderror aria-describedby="deleteCheckedClientsFeedback"> 
+        <input type="submit" id="deleteCheckedBtn" class="btn btn-danger" value="Obriši označene klijente" @error('clientsForDeleting') is-invalid @enderror aria-describedby="deleteCheckedClientsFeedback"> 
 
         @error('clientsForDeleting')
         <div id="deleteCheckedClientsFeedback" class="invalid-feedback">
@@ -50,7 +51,7 @@
   <tbody>
     @foreach ($clients as $client)
     <tr>
-      <td><input type="checkbox" name="clientsForDeleting[]" value="{{ $client }}" id="checkClientforDeletion"/></td>
+      <td><input class="checkForDeletion" type="checkbox" value="{{ $client->id }}" id="checkClientforDeletion"/></td>
       <td>{{ $client->id }}</td>
       <td>{{ $client->name }}</td>
       <td><a class="btn btn-info" href="{{ route('clients.show', $client) }}">Otvori</a></td>
@@ -85,14 +86,29 @@ deleteButtons.forEach(function(element) {
   });
 })
 
-var deleteCheckedButton = document.getElementById('deleteChecked');
+var deleteCheckedButton = document.getElementById('deleteCheckedBtn');
 
 deleteCheckedButton.addEventListener("click", function(event)
 {
   event.preventDefault();
   if (confirm('Jeste li sigurni o brisanju označenih klijenata?'))
   {
-    deleteCheckedButton.closest('form').submit();
+    var ids = [];
+    var checkedArray = document.querySelector('#deleteCheckedForm input[name= "clientsForDeleting"]');
+    console.log(checkedArray);
+    var checkBoxes = document.querySelectorAll('.checkForDeletion');
+
+    checkBoxes.forEach(function(element)
+    {
+      if(element.checked)
+      {
+        ids.push(element.value);
+      }
+    });
+
+   checkedArray.value = ids;
+
+   deleteCheckedButton.closest('form').submit();
   }
 });
 

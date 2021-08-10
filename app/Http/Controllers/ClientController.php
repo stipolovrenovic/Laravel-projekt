@@ -132,11 +132,12 @@ class ClientController extends Controller
     {
         $validated = $request->validated();
 
-        dd($request);
+        $clientIds = explode(',', $request->clientsForDeleting);
 
-        foreach($request->clientsForDeleting as $client)
+        foreach($clientIds as $clientId)
         {
-            $client->delete();
+           $client = Client::where('id', '=', $clientId);
+           $client->delete();
         }
 
         return back();

@@ -124,9 +124,12 @@ class ProjectController extends Controller
     {
         $validated = $request->validated();
 
-        foreach($request->projectsForDeleting as $project)
+        $projectIds = explode(',', $request->projectsForDeleting);
+
+        foreach($projectIds as $projectId)
         {
-            $project->delete();
+           $project = Project::where('id', '=', $projectId);
+           $project->delete();
         }
 
         return back();
