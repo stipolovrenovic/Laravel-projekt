@@ -13,7 +13,14 @@ class DeleteClientsRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if(auth()->user()->is_admin == true)
+        {
+            return true;
+        }
+        else
+        {
+           return false;
+        }
     }
 
     /**
