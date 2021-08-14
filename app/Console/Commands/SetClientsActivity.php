@@ -40,12 +40,10 @@ class SetClientsActivity extends Command
     {
         $clients = Client::all();
 
-        foreach($clients as $client);
+        foreach($clients as $client)
         {
             $client->active = $this->argument('activeBool');
             $client->save();
         } 
-
-        $this->info($clients);
     }
 }
