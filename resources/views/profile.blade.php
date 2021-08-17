@@ -40,7 +40,7 @@
     </div>
     @if(auth()->user()->image)
     <div class="form-group">
-      <img id="previewImage" src="{{ asset(auth()->user()->image) }}" style="width: 200px;"> 
+      <img id="previewImage" src="{{ asset(auth()->user()->image) }" style="width: 200px;"> 
     </div>
     <a href="{{ route('users.deleteImage') }}">Obriši sliku</a>
     @endif
@@ -60,15 +60,15 @@
   </form>
 </div>
 <script>
- function changeImage(image)
- {
-  var previewImage = document.getElementById('previewImage');
-  previewImage.src = image.value;
+  function changeImage(image)
+  {
+    var previewImage = document.getElementById('previewImage');
+    previewImage.src = image.value;
 
-    /*
-      Trebalo bi raditi u teoriji ali Chrome ne dopušta prikaz lokalnih datoteka.
-      Za provjeru u input za sliku dodajte onchange="changeImage(this)"
+      /*
+        Trebalo bi raditi u teoriji ali Chrome ne dopušta prikaz lokalnih datoteka.
+        Za provjeru u input za sliku dodajte onchange="changeImage(this)"
       */
-    }
-  </script>
+  }
+</script>
   @endsection

@@ -144,6 +144,16 @@ $services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_
       </label>
     </div>
   </div>
+  <div class="form-group">
+      <label for="exampleInputImage">Slike</label>
+      <input type="file" class="form-control @error('images') is-invalid @enderror" id="exampleInputImage" name="images[]" multiple>
+
+      @error('images')
+      <div id="selectImageFeedback" class="invalid-feedback">
+        {{ $message }}
+      </div>
+      @enderror
+  </div>
   <button type="submit" class="btn btn-primary">Spremi</button>
 </form>
 </div>

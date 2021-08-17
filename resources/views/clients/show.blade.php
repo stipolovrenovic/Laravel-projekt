@@ -54,5 +54,13 @@ $serviceArray = $client->services
  @else
  <p>Nema projekata.</p>
  @endif
+ <h5>Slike:</h5>
+ @if(count($client->images) >= 1)
+ @foreach($client->images as $image)
+ <img src="{{ $image }}" style="width: 200px;">
+ @endforeach
+ @else
+ <p>Nema slika.</p>
+ @endif
 </div>
 @endsection

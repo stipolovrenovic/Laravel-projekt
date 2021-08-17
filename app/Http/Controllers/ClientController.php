@@ -63,6 +63,20 @@ class ClientController extends Controller
         $client->active = $request->active;
         $client->save();
 
+        if($request->images)
+        {
+            foreach($request->file('images') as $image)
+            {
+                $Image = new Image();
+                $Image->client_id = $client->id;
+                $Image->path = $image;
+
+                $image = store('clientImages');
+
+                $Image->save();
+            }
+        }
+
 
         return redirect()->route('clients.index');
     }
@@ -112,6 +126,27 @@ class ClientController extends Controller
         $client->services = $request->services;
         $client->active = $request->active;
         $client->save();
+
+        if($request->images)
+        {
+            foreach($request->file('images') as $image)
+            {
+                $Image = new Image();
+                $Image->client_id = $client->id;
+                $Image->path = $image;
+
+                $image = $request->file('image')->store('clientImages');
+            }
+        }
+
+        if($request->imagesForDeletion)
+        {
+            foreach($request->imagesForDeletion as $image)
+            {
+                Storage::delete($image);
+                $image->delete();
+            }
+        }
 
         return redirect()->route('clients.index');
     }
