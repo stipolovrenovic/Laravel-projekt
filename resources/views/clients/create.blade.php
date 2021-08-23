@@ -11,7 +11,7 @@ $services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_
     <h1 class="h3 mb-0 text-gray-800">Novi klijent</h1>
   </div>
 
-  <form action="{{ route('clients.store') }}" method="POST">
+  <form action="{{ route('clients.store') }}" method="POST" enctype="multipart/form-data">
    @csrf
 
    <div class="form-group">

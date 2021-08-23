@@ -34,7 +34,7 @@ class UpdateClientRequest extends FormRequest
             'international' => 'required',
             'email' => 'required|email|unique:clients,email,'.request()->route('client')->id,
             'services' => 'required',
-            'images' => 'image|max:3000',
+            'images.*' => 'image|max:3000',
         ];
     }
 

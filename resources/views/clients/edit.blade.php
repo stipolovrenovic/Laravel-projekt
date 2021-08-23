@@ -11,7 +11,7 @@ $services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_
   <h1 class="h3 mb-0 text-gray-800">Uredi klijenta</h1>
  </div>
 
-<form action="{{ route('clients.update', $client) }}" method="POST">
+<form action="{{ route('clients.update', $client) }}" method="POST" enctype="multipart/form-data">
  @csrf
  @method('PUT')
 
@@ -157,9 +157,10 @@ $services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_
 
   @if(count($client->images) >= 1)
    @foreach($client->images as $image)
-   <input class="form-check-input" type="checkbox" name="imageForDeletion" value="{{ $image }}">
-   <img src="{{ $image }}" style="width: 200px;">
+   <img src="{{ asset($image->path) }}" style="width: 200px;">
+   <a href="{{ route('clients.deleteImage', $image) }}">Obriši sliku</a>
    @endforeach
+  @endif
 </div>
 <button type="submit" class="btn btn-primary">Spremi</button>
 </form>

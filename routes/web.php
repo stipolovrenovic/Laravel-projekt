@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
 	Route::get('/clients/{client}', [ClientController::class, 'show'])->name('clients.show');
 	Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->name('clients.edit');
+	Route::get('/clients/edit/{image}', [ClientController::class, 'deleteImage'])->name('clients.deleteImage');
 	Route::put('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
 
 	Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');

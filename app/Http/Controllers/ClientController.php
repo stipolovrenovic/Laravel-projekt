@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Models\Image;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Http\Requests\DeleteClientsRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
@@ -65,13 +67,11 @@ class ClientController extends Controller
 
         if($request->images)
         {
-            foreach($request->file('images') as $image)
+            foreach($request->images as $image)
             {
                 $Image = new Image();
+                $Image->path = $image->store('clientImages');
                 $Image->client_id = $client->id;
-                $Image->path = $image;
-
-                $image = store('clientImages');
 
                 $Image->save();
             }
@@ -129,13 +129,13 @@ class ClientController extends Controller
 
         if($request->images)
         {
-            foreach($request->file('images') as $image)
+            foreach($request->images as $image)
             {
                 $Image = new Image();
+                $Image->path = $image->store('clientImages');
                 $Image->client_id = $client->id;
-                $Image->path = $image;
 
-                $image = $request->file('image')->store('clientImages');
+                $Image->save();
             }
         }
 
@@ -159,8 +159,21 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
+        foreach($client->images as $image)
+        {
+            Storage::delete($image->path);
+        }
+
         $client->delete();
         return redirect()->route('clients.index');
+    }
+
+    public function deleteImage(Image $image)
+    {
+        Storage::delete($image->path);
+
+        $image->delete();
+        return back();
     }
 
     public function destroyChecked(DeleteClientsRequest $request)

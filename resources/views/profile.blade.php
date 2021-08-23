@@ -40,7 +40,7 @@
     </div>
     @if(auth()->user()->image)
     <div class="form-group">
-      <img id="previewImage" src="{{ asset(auth()->user()->image) }" style="width: 200px;"> 
+      <img id="previewImage" src="{{ asset(auth()->user()->image) }}" style="width: 200px;"> 
     </div>
     <a href="{{ route('users.deleteImage') }}">Obriši sliku</a>
     @endif

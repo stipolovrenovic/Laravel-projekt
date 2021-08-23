@@ -35,7 +35,7 @@ class StoreClientRequest extends FormRequest
             'international' => 'required',
             'email' => 'required|email|unique:clients',
             'services' => 'required',
-            'images' => 'image|max:3000'
+            'images.*' => 'image|max:3000'
         ];
     }
 }
