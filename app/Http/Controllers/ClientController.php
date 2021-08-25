@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateClientRequest;
 use App\Http\Requests\DeleteClientsRequest;
 use Illuminate\Support\Facades\Storage;
 
+
 class ClientController extends Controller
 {
     /**

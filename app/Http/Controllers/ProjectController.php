@@ -7,6 +7,8 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\DeleteProjectsRequest;
+use App\Mail\ProjectCreated;
+use Illuminate\Support\Facades\Mail;
 
 class ProjectController extends Controller
 {
@@ -58,6 +60,10 @@ class ProjectController extends Controller
         $project->price = $request->price;
         $project->deployed_at = $request->deployed_at;
         $project->save();
+
+        $client = $project->client;
+
+        Mail::to("admin.admin@admin.hr")->send(new ProjectCreated($project, $client, auth()->user()));        
 
         return redirect()->route('projects.index');
     }
