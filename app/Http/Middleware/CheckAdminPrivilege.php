@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CheckAdminPrivilege
 {
@@ -17,6 +18,8 @@ class CheckAdminPrivilege
     public function handle(Request $request, Closure $next)
     {
         if (auth()->user()->is_admin == false) {
+
+            Log::warning('Korisnik '.auth()->user()->name.' pokušava obrisati objekt iz tablice bez administratorskih ovlasti.');
             return back();
         }
 
