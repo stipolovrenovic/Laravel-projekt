@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\ClientSeeder;
 use Database\Seeders\ProjectSeeder;
+use Database\Seeders\ServiceSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
     	$this->call([
+            ServiceSeeder::class,
     		ClientSeeder::class,
     		ProjectSeeder::class
     	]);

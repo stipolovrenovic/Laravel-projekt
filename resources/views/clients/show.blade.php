@@ -16,7 +16,7 @@ $serviceArray = $client->services
   <p><h5>OIB: </h5>{{ $client->oib }}</p>
   <p><h5>Vrsta klijenta: </h5>@if($client->type == 1) Fizička osoba @else Pravna osoba @endif</p>
   <p><h5>E-Mail Adresa: </h5>{{ $client->email }}</p>
-  <p><h5>Usluge: </h5>@foreach($client->services as $service){{ str_replace('_', ' ', $service) }}@if(end($serviceArray) != $service), @endif @endforeach.</p>
+  <p><h5>Usluge: </h5>@if($client->services) @foreach($client->services as $service){{ $service->name }}@if(end($serviceArray) != $service), @endif @endforeach. @else Nema usluga. @endif</p>
   <p><h5>Aktivan? </h5>@if($client->active == 1) Da @else Ne @endif</p>
   <h5>Projekti:</h5>
   @if(count($client->projects) >= 1)

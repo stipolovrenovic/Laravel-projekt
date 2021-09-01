@@ -9,10 +9,6 @@ class Client extends Model
 {
     use HasFactory;
 
-    protected $casts = [
-        'services' => 'array',
-    ];
-
     public function projects()
     {
     	return $this->hasMany(Project::class);
@@ -21,5 +17,10 @@ class Client extends Model
     public function images()
     {
     	return $this->hasMany(Image::class);
+    }
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
     }
 }

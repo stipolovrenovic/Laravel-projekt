@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Models\Image;
+use App\Models\Service;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Http\Requests\DeleteClientsRequest;
@@ -39,7 +40,9 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        return view('clients.create', [
+            'services' => Service::all()
+        ]);
     }
 
     /**
@@ -62,9 +65,10 @@ class ClientController extends Controller
         $client->type = $request->type;
         $client->international = $request->international;
         $client->email = $request->email;
-        $client->services = $request->services;
         $client->active = $request->active;
         $client->save();
+
+        $client->services()->sync($request->services);
 
         if($request->images)
         {
@@ -101,7 +105,9 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('clients.edit', compact('client'));
+        $services = Service::all();
+
+        return view('clients.edit', compact('client', 'services'));
     }
 
     /**
@@ -124,7 +130,7 @@ class ClientController extends Controller
         $client->type = $request->type;
         $client->international = $request->international;
         $client->email = $request->email;
-        $client->services = $request->services;
+        $client->services()->sync($request->services);
         $client->active = $request->active;
         $client->save();
 

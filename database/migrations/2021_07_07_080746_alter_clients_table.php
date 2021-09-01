@@ -17,7 +17,6 @@ class AlterClientsTable extends Migration
             $table->integer('type');
             $table->integer('international');
             $table->string('email');
-            $table->string('services');
             $table->boolean('active');
         });
     }
