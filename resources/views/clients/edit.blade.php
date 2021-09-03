@@ -1,9 +1,6 @@
 @extends ('layout')
 @section ('content')
 
-<?php
-$services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_Oglašavanje', 'Facebook_Oglašavanje');
-?>
 
 <div class="container-fluid">
 
@@ -125,7 +122,7 @@ $services = array('Domena','Hosting','Održavanje', 'SEO_Optimizacija', 'Google_
   <label for="selectServices">Usluge</label>
   <select class="custom-select @error('services') is-invalid @enderror" id="selectServices" name="services[]" aria-describedby="selectServicesFeedback" multiple>
     @foreach($services as $service)
-    <option value="$service->id" @if($client->services && in_array($service->id, $client->services)) selected @endif>{{ $service->name }}</option>
+    <option value="{{ $service->id }}" @if($client->services->contains($service->id))) selected @endif>{{ $service->name }}</option>
     @endforeach
   </select>
 

@@ -22,15 +22,21 @@ class ClientController extends Controller
     public function index(Request $request)
     {
         if(!$request->keyword)
-            return view('clients.index', [
-                'clients' => Client::paginate(10)
-            ]);
+            $clients = Client::paginate(10);
         else
         {
-            return view('clients.index', [
-                'clients' => Client::where('name', 'like', '%'.$request->keyword.'%')->paginate(10)
-            ]);
+           $clients = Client::where('name', 'like', '%'.$request->keyword.'%')->paginate(10)  
         }
+
+        if($request->wantsJson())
+        {
+            return $clients;
+        }
+        else
+        {
+            return view('clients.index', compact('clients'));
+        }
+        
     }
 
     /**
@@ -130,9 +136,10 @@ class ClientController extends Controller
         $client->type = $request->type;
         $client->international = $request->international;
         $client->email = $request->email;
-        $client->services()->sync($request->services);
         $client->active = $request->active;
         $client->save();
+
+        $client->services()->sync($request->services);
 
         if($request->images)
         {

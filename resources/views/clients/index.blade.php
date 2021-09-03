@@ -10,7 +10,7 @@
   <form
   class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{{ route('clients.index') }}" method="GET">
   <div class="input-group">
-   <input type="text" class="form-control bg-white border-0 small" name="keyword" placeholder="Unesite ime klijenta..."
+   <input id="searchInput" type="text" class="form-control bg-white border-0 small" name="keyword" placeholder="Unesite ime klijenta..."
    aria-label="Search" aria-describedby="basic-addon2">
    <div class="input-group-append">
     <button class="btn btn-primary" type="submit">
@@ -48,7 +48,7 @@
       <th scope="col">Obriši klijenta</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id ="tableBody">
     @foreach ($clients as $client)
     <tr>
       <td><input class="checkForDeletion" type="checkbox" value="{{ $client->id }}" id="checkClientforDeletion"/></td>
@@ -73,6 +73,48 @@
 {{ $clients->links() }}
 </div>
 <script>
+var searchInput = document.getElementById('searchInput');
+
+searchInput.addEventListener("input", function(event)
+{
+  fetch('http://example-app.test/clients?keyword=' + searchInput.value, 
+  {
+    headers: 
+    {
+      'Accept': 'application/json',
+      'X-CSRF-TOKEN': {{ csrf_token() }}
+    }
+  })
+    .then(response => response.json())
+    .then(data => function
+    {
+      var tableBody = "";
+
+      data.data.foreach(function(row)
+      {
+        var tableRow = "";
+        tableRow = '<tr>'+ 
+        '<td><input class="checkForDeletion" type="checkbox" value="'+ row.id +'" id="checkClientforDeletion"/></td>' +
+        '<td>'+ row.name +'</td>'+
+        '<td><a class="btn btn-info" href="' + {{ route('clients.show', row) }} + '">Otvori</a></td>' +
+        '<td><a class="btn btn-primary" href="' + {{ route('clients.edit', row) }} + '">Uredi</a></td>' +
+        '<td>' +
+           '<form method="POST" action="' + {{ route('clients.destroy', row) }} + '">' +
+             @csrf +
+             @method('DELETE')
+            +
+             '<div class="form-group">' +
+               '<input type="submit" class="deleteButton btn btn-danger" value="Obriši">' +
+             '</div>' +
+           '</form>' +
+         '</td>'
+        + '</tr>';
+
+        tableBody += tableRow;
+      })
+    });
+});
+
 var deleteButtons = document.querySelectorAll('.deleteButton');
 
 deleteButtons.forEach(function(element) {
