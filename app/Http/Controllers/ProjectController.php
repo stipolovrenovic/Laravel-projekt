@@ -20,10 +20,10 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         if(!$request->keyword)
-            $projects = Project::paginate(10);
+            $projects = Project::with('client')->paginate(10);
         else
         {
-            $projects = Project::where('name', 'like', '%'.$request->keyword.'%')->paginate(10);
+            $projects = Project::with('client')->where('name', 'like', '%'.$request->keyword.'%')->paginate(10);
         }
 
 

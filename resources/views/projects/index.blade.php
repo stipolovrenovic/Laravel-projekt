@@ -94,14 +94,12 @@ searchInput.addEventListener("input", function(event)
 
       data.data.forEach(function(row)
       {
-        console.log(row);
-
         var tableRow = "";
         tableRow = '<tr>'+ 
         '<td><input class="checkForDeletion" type="checkbox" value="'+ row.id +'" id="checkProjectforDeletion"/></td>' +
         '<td>'+ row.id +'</td>' +
         '<td>'+ row.name +'</td>'+
-        '<td>'+ row.client.name + '</td>'+ //Znam da ovo ne radi, samo neznam kako da dobijem ime klijenta
+        '<td>'+ row.client.name + '</td>'+ 
         '<td><a class="btn btn-info" href="http://example-app.test/projects/'+ row.id +'">Otvori</a></td>' +
         '<td><a class="btn btn-primary" href="http://example-app.test/projects/'+ row.id +'/edit">Uredi</a></td>' +
         '<td>' +
