@@ -20,14 +20,20 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         if(!$request->keyword)
-            return view('projects.index', [
-                'projects' => Project::paginate(10)
-            ]);
+            $projects = Project::paginate(10);
         else
         {
-            return view('projects.index', [
-                'projects' => Project::where('name', 'like', '%'.$request->keyword.'%')->paginate(10)
-            ]);
+            $projects = Project::where('name', 'like', '%'.$request->keyword.'%')->paginate(10);
+        }
+
+
+        if($request->wantsJson())
+        {
+            return $projects;
+        }
+        else
+        {
+            return view('projects.index', compact('projects'));
         }
     }
 

@@ -48,7 +48,7 @@
       <th scope="col">Obriši klijenta</th>
     </tr>
   </thead>
-  <tbody id ="tableBody">
+  <tbody id="tableBody">
     @foreach ($clients as $client)
     <tr>
       <td><input class="checkForDeletion" type="checkbox" value="{{ $client->id }}" id="checkClientforDeletion"/></td>
@@ -82,27 +82,27 @@ searchInput.addEventListener("input", function(event)
     headers: 
     {
       'Accept': 'application/json',
-      'X-CSRF-TOKEN': {{ csrf_token() }}
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
     }
   })
     .then(response => response.json())
-    .then(data => function
+    .then(data => 
     {
-      var tableBody = "";
+      var tableBodyContent = "";
 
-      data.data.foreach(function(row)
+      data.data.forEach(function(row)
       {
         var tableRow = "";
         tableRow = '<tr>'+ 
         '<td><input class="checkForDeletion" type="checkbox" value="'+ row.id +'" id="checkClientforDeletion"/></td>' +
+        '<td>'+ row.id +'</td>' +
         '<td>'+ row.name +'</td>'+
-        '<td><a class="btn btn-info" href="' + {{ route('clients.show', row) }} + '">Otvori</a></td>' +
-        '<td><a class="btn btn-primary" href="' + {{ route('clients.edit', row) }} + '">Uredi</a></td>' +
+        '<td><a class="btn btn-info" href="http://example-app.test/clients/'+ row.id +'">Otvori</a></td>' +
+        '<td><a class="btn btn-primary" href="http://example-app.test/clients/'+ row.id +'/edit">Uredi</a></td>' +
         '<td>' +
-           '<form method="POST" action="' + {{ route('clients.destroy', row) }} + '">' +
-             @csrf +
-             @method('DELETE')
-            +
+           '<form method="POST" action="http://example-app.test/clients/'+ row.id +'">' +
+             '@csrf' +
+             '@method("DELETE")'+
              '<div class="form-group">' +
                '<input type="submit" class="deleteButton btn btn-danger" value="Obriši">' +
              '</div>' +
@@ -110,12 +110,26 @@ searchInput.addEventListener("input", function(event)
          '</td>'
         + '</tr>';
 
-        tableBody += tableRow;
+        tableBodyContent += tableRow;
       })
+
+      var tableBody = document.getElementById('tableBody');
+      tableBody.innerHTML = tableBodyContent;
     });
 });
 
-var deleteButtons = document.querySelectorAll('.deleteButton');
+
+document.addEventListener('click',function(e){
+  if(e.target && e.target.classList.contains('deleteButton')){
+    e.preventDefault();
+    if (confirm('Jeste li sigurni o brisanju klijenta?'))
+    {
+       e.target.closest('form').submit();
+    }
+  }
+});
+
+/*var deleteButtons = document.querySelectorAll('.deleteButton');
 
 deleteButtons.forEach(function(element) {
   element.addEventListener("click", function(event)
@@ -126,7 +140,7 @@ deleteButtons.forEach(function(element) {
       element.closest('form').submit();
     }
   });
-})
+})*/
 
 var deleteCheckedButton = document.getElementById('deleteCheckedBtn');
 

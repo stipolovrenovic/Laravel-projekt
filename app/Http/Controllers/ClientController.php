@@ -25,7 +25,7 @@ class ClientController extends Controller
             $clients = Client::paginate(10);
         else
         {
-           $clients = Client::where('name', 'like', '%'.$request->keyword.'%')->paginate(10)  
+           $clients = Client::where('name', 'like', '%'.$request->keyword.'%')->paginate(10);  
         }
 
         if($request->wantsJson())

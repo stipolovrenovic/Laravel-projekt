@@ -10,7 +10,7 @@
   <form
   class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{{ route('projects.index') }}" method="GET">
   <div class="input-group">
-    <input type="text" class="form-control bg-white border-0 small" name="keyword" placeholder="Unesite naziv projekta..."
+    <input id="searchInput" type="text" class="form-control bg-white border-0 small" name="keyword" placeholder="Unesite naziv projekta..."
     aria-label="Search" aria-describedby="basic-addon2">
     <div class="input-group-append">
       <button class="btn btn-primary" type="submit">
@@ -49,7 +49,7 @@
       <th scope="col">Obriši projekt</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="tableBody">
     @foreach ($projects as $project)
     <tr>
       <td><input class="checkForDeletion" type="checkbox" value="{{ $project->id }}" id="checkProjectforDeletion"/></td>
@@ -75,7 +75,67 @@
 {{ $projects->links() }}
 </div>
 <script>
-var deleteButtons = document.querySelectorAll('.deleteButton');
+var searchInput = document.getElementById('searchInput');
+
+searchInput.addEventListener("input", function(event)
+{
+  fetch('http://example-app.test/projects?keyword=' + searchInput.value, 
+  {
+    headers: 
+    {
+      'Accept': 'application/json',
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    }
+  })
+    .then(response => response.json())
+    .then(data =>
+    {
+      var tableBodyContent = "";
+
+      data.data.forEach(function(row)
+      {
+        console.log(row);
+
+        var tableRow = "";
+        tableRow = '<tr>'+ 
+        '<td><input class="checkForDeletion" type="checkbox" value="'+ row.id +'" id="checkProjectforDeletion"/></td>' +
+        '<td>'+ row.id +'</td>' +
+        '<td>'+ row.name +'</td>'+
+        '<td>'+ row.client.name + '</td>'+ //Znam da ovo ne radi, samo neznam kako da dobijem ime klijenta
+        '<td><a class="btn btn-info" href="http://example-app.test/projects/'+ row.id +'">Otvori</a></td>' +
+        '<td><a class="btn btn-primary" href="http://example-app.test/projects/'+ row.id +'/edit">Uredi</a></td>' +
+        '<td>' +
+           '<form method="POST" action="http://example-app.test/clients/'+ row.id +'">' +
+            '@csrf' +
+            '@method("DELETE")' +
+             '<div class="form-group">' +
+               '<input type="submit" class="deleteButton btn btn-danger" value="Obriši">' +
+             '</div>' +
+           '</form>' +
+         '</td>'
+        + '</tr>';
+
+        tableBodyContent += tableRow;
+      })
+
+      var tableBody = document.getElementById('tableBody');
+      tableBody.innerHTML = tableBodyContent;
+
+    });
+});
+
+document.addEventListener('click',function(e){
+  if(e.target && e.target.classList.contains('deleteButton')){
+    e.preventDefault();
+    if (confirm('Jeste li sigurni o brisanju projekta?'))
+    {
+       e.target.closest('form').submit();
+    }
+  }
+});
+
+
+/*var deleteButtons = document.querySelectorAll('.deleteButton');
 
 deleteButtons.forEach(function(element) {
   element.addEventListener("click", function(event)
@@ -86,7 +146,7 @@ deleteButtons.forEach(function(element) {
       element.closest('form').submit();
     }
   });
-})
+})*/
 
 var deleteCheckedButton = document.getElementById('deleteCheckedBtn');
 
