@@ -20,7 +20,9 @@ class CheckAdminPrivilege
         if (auth()->user()->is_admin == false) {
 
             Log::warning('Korisnik '.auth()->user()->name.' pokušava obrisati objekt iz tablice bez administratorskih ovlasti.');
-            return back();
+            return back()->with(
+                ['message' => 'Nemate pravo brisanja!']
+            );
         }
 
         return $next($request);

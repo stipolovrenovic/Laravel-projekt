@@ -3,6 +3,12 @@
 
 <div class="container-fluid">
 
+  @if(session('message'))
+  <div class="alert alert-danger" role="alert">
+    {{ session('message') }}
+  </div>
+  @endif
+
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Klijenti</h1>
   </div>
@@ -23,19 +29,19 @@
 <br>
 <br>
 <form id="deleteCheckedForm" method="POST" action="{{ route('clients.destroyChecked') }}">
-      @csrf
-      @method('DELETE')
+  @csrf
+  @method('DELETE')
 
-      <input type="hidden" name="clientsForDeleting" value="">
-      <div class="form-group">
-        <input type="submit" id="deleteCheckedBtn" class="btn btn-danger" value="Obriši označene klijente" @error('clientsForDeleting') is-invalid @enderror aria-describedby="deleteCheckedClientsFeedback"> 
+  <input type="hidden" name="clientsForDeleting" value="">
+  <div class="form-group">
+    <input type="submit" id="deleteCheckedBtn" class="btn btn-danger" value="Obriši označene klijente" @error('clientsForDeleting') is-invalid @enderror aria-describedby="deleteCheckedClientsFeedback"> 
 
-        @error('clientsForDeleting')
-        <div id="deleteCheckedClientsFeedback" class="invalid-feedback">
-          {{ $message }}
-        </div>
-        @enderror
-      </div>
+    @error('clientsForDeleting')
+    <div id="deleteCheckedClientsFeedback" class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </div>
 </form>  
 <table class="table bg-white">
   <thead>
@@ -73,18 +79,18 @@
 {{ $clients->links() }}
 </div>
 <script>
-var searchInput = document.getElementById('searchInput');
+  var searchInput = document.getElementById('searchInput');
 
-searchInput.addEventListener("input", function(event)
-{
-  fetch('http://example-app.test/clients?keyword=' + searchInput.value, 
+  searchInput.addEventListener("input", function(event)
   {
-    headers: 
+    fetch('http://example-app.test/clients?keyword=' + searchInput.value, 
     {
-      'Accept': 'application/json',
-      'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    }
-  })
+      headers: 
+      {
+        'Accept': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+      }
+    })
     .then(response => response.json())
     .then(data => 
     {
@@ -100,14 +106,14 @@ searchInput.addEventListener("input", function(event)
         '<td><a class="btn btn-info" href="http://example-app.test/clients/'+ row.id +'">Otvori</a></td>' +
         '<td><a class="btn btn-primary" href="http://example-app.test/clients/'+ row.id +'/edit">Uredi</a></td>' +
         '<td>' +
-           '<form method="POST" action="http://example-app.test/clients/'+ row.id +'">' +
-             '@csrf' +
-             '@method("DELETE")'+
-             '<div class="form-group">' +
-               '<input type="submit" class="deleteButton btn btn-danger" value="Obriši">' +
-             '</div>' +
-           '</form>' +
-         '</td>'
+        '<form method="POST" action="http://example-app.test/clients/'+ row.id +'">' +
+        '@csrf' +
+        '@method("DELETE")'+
+        '<div class="form-group">' +
+        '<input type="submit" class="deleteButton btn btn-danger" value="Obriši">' +
+        '</div>' +
+        '</form>' +
+        '</td>'
         + '</tr>';
 
         tableBodyContent += tableRow;
@@ -116,18 +122,18 @@ searchInput.addEventListener("input", function(event)
       var tableBody = document.getElementById('tableBody');
       tableBody.innerHTML = tableBodyContent;
     });
-});
+  });
 
 
-document.addEventListener('click',function(e){
-  if(e.target && e.target.classList.contains('deleteButton')){
-    e.preventDefault();
-    if (confirm('Jeste li sigurni o brisanju klijenta?'))
-    {
+  document.addEventListener('click',function(e){
+    if(e.target && e.target.classList.contains('deleteButton')){
+      e.preventDefault();
+      if (confirm('Jeste li sigurni o brisanju klijenta?'))
+      {
        e.target.closest('form').submit();
-    }
-  }
-});
+     }
+   }
+ });
 
 /*var deleteButtons = document.querySelectorAll('.deleteButton');
 
@@ -162,9 +168,9 @@ deleteCheckedButton.addEventListener("click", function(event)
       }
     });
 
-   checkedArray.value = ids;
+    checkedArray.value = ids;
 
-   deleteCheckedButton.closest('form').submit();
+    deleteCheckedButton.closest('form').submit();
   }
 });
 

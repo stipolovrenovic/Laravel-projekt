@@ -3,39 +3,46 @@
 
 <div class="container-fluid">
 
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Projekti</h1>
-  </div>
 
-  <form
-  class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{{ route('projects.index') }}" method="GET">
-  <div class="input-group">
-    <input id="searchInput" type="text" class="form-control bg-white border-0 small" name="keyword" placeholder="Unesite naziv projekta..."
-    aria-label="Search" aria-describedby="basic-addon2">
-    <div class="input-group-append">
-      <button class="btn btn-primary" type="submit">
-        <i class="fas fa-search fa-sm"></i>
-      </button>
-    </div>
+@if(session('message'))
+<div class="alert alert-danger" role="alert">
+  {{ session('message') }}
+</div>
+@endif
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Projekti</h1>
+</div>
+
+<form
+class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{{ route('projects.index') }}" method="GET">
+<div class="input-group">
+  <input id="searchInput" type="text" class="form-control bg-white border-0 small" name="keyword" placeholder="Unesite naziv projekta..."
+  aria-label="Search" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-primary" type="submit">
+      <i class="fas fa-search fa-sm"></i>
+    </button>
   </div>
+</div>
 </form>
 <a class="btn btn-success" href="{{ route('projects.create') }}">Novi projekt</a>
 <br>
 <br>
 <form id="deleteCheckedForm" method="POST" action="{{ route('projects.destroyChecked') }}">
-      @csrf
-      @method('DELETE')
+  @csrf
+  @method('DELETE')
 
-      <input type="hidden" name="projectsForDeleting" value="">
-      <div class="form-group">
-        <input type="submit" id="deleteCheckedBtn" class="btn btn-danger" value="Obriši označene projekte"  @error('projectsForDeleting') is-invalid @enderror aria-describedby="deleteCheckedProjectsFeedback">
+  <input type="hidden" name="projectsForDeleting" value="">
+  <div class="form-group">
+    <input type="submit" id="deleteCheckedBtn" class="btn btn-danger" value="Obriši označene projekte"  @error('projectsForDeleting') is-invalid @enderror aria-describedby="deleteCheckedProjectsFeedback">
 
-        @error('projectsForDeleting')
-        <div id="deleteCheckedProjectsFeedback" class="invalid-feedback">
-          {{ $message }}
-        </div>
-        @enderror
-      </div>
+    @error('projectsForDeleting')
+    <div id="deleteCheckedProjectsFeedback" class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </div>
 </form>  
 <table class="table bg-white">
   <thead>
@@ -75,18 +82,18 @@
 {{ $projects->links() }}
 </div>
 <script>
-var searchInput = document.getElementById('searchInput');
+  var searchInput = document.getElementById('searchInput');
 
-searchInput.addEventListener("input", function(event)
-{
-  fetch('http://example-app.test/projects?keyword=' + searchInput.value, 
+  searchInput.addEventListener("input", function(event)
   {
-    headers: 
+    fetch('http://example-app.test/projects?keyword=' + searchInput.value, 
     {
-      'Accept': 'application/json',
-      'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    }
-  })
+      headers: 
+      {
+        'Accept': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+      }
+    })
     .then(response => response.json())
     .then(data =>
     {
@@ -103,14 +110,14 @@ searchInput.addEventListener("input", function(event)
         '<td><a class="btn btn-info" href="http://example-app.test/projects/'+ row.id +'">Otvori</a></td>' +
         '<td><a class="btn btn-primary" href="http://example-app.test/projects/'+ row.id +'/edit">Uredi</a></td>' +
         '<td>' +
-           '<form method="POST" action="http://example-app.test/clients/'+ row.id +'">' +
-            '@csrf' +
-            '@method("DELETE")' +
-             '<div class="form-group">' +
-               '<input type="submit" class="deleteButton btn btn-danger" value="Obriši">' +
-             '</div>' +
-           '</form>' +
-         '</td>'
+        '<form method="POST" action="http://example-app.test/clients/'+ row.id +'">' +
+        '@csrf' +
+        '@method("DELETE")' +
+        '<div class="form-group">' +
+        '<input type="submit" class="deleteButton btn btn-danger" value="Obriši">' +
+        '</div>' +
+        '</form>' +
+        '</td>'
         + '</tr>';
 
         tableBodyContent += tableRow;
@@ -120,17 +127,17 @@ searchInput.addEventListener("input", function(event)
       tableBody.innerHTML = tableBodyContent;
 
     });
-});
+  });
 
-document.addEventListener('click',function(e){
-  if(e.target && e.target.classList.contains('deleteButton')){
-    e.preventDefault();
-    if (confirm('Jeste li sigurni o brisanju projekta?'))
-    {
+  document.addEventListener('click',function(e){
+    if(e.target && e.target.classList.contains('deleteButton')){
+      e.preventDefault();
+      if (confirm('Jeste li sigurni o brisanju projekta?'))
+      {
        e.target.closest('form').submit();
-    }
-  }
-});
+     }
+   }
+ });
 
 
 /*var deleteButtons = document.querySelectorAll('.deleteButton');
@@ -166,9 +173,9 @@ deleteCheckedButton.addEventListener("click", function(event)
       }
     });
 
-   checkedArray.value = ids;
+    checkedArray.value = ids;
 
-   deleteCheckedButton.closest('form').submit();
+    deleteCheckedButton.closest('form').submit();
   }
 });
 </script>

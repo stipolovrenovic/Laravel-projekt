@@ -61,7 +61,7 @@
 </div>
 <div class="form-group">
   <label for="inputDate">Datum</label>
-  <input class="datepicker form-control @error('deployed_at') is-invalid @enderror" id="inputDate" name="deployed_at" value="{{ $project->deployed_at }}"  onkeydown="return false" aria-describedby="inputDateFeedback">
+  <input class="datepicker form-control @error('deployed_at') is-invalid @enderror" id="inputDate" name="deployed_at" value="{{ $project->deployed_at }}"  onkeydown="return false" aria-describedby="inputDateFeedback" autocomplete="off">
 
   @error('deployed_at')
   <div id="inputDateFeedback" class="invalid-feedback">
@@ -78,13 +78,13 @@
 <script type="text/javascript" src="{{url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
 <script>
   tinymce.init({
-    menubar:false,
-    statusbar:false,
+    menubar: false,
+    statusbar: false,
     selector: '#inputDescription'
   });
 
   $('#inputDate').datepicker({
-    format: 'yyyy-mm-dd',
+    format: 'dd.mm.yyyy',
     language: 'hr'
   });
 </script>
